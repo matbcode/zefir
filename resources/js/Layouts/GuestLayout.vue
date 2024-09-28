@@ -3,7 +3,7 @@ import Card from 'primevue/card'
 </script>
 
 <template>
-	<div class="flex h-screen w-screen items-center justify-center bg-slate-100">
+	<div class="flex h-screen w-screen items-center justify-center bg-gray-50">
 		<Card class="w-full max-w-sm">
 			<template #title>
 				<slot name="title" />

@@ -15,10 +15,18 @@ export default {
 
 	theme: {
 		fontFamily: {
-			sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+			sans: ['Assistant', ...defaultTheme.fontFamily.sans],
 		},
 		container: {
 			center: true,
+		},
+		extend: {
+			gridTemplateColumns: {
+				main: '288px minmax(0, 1fr)',
+			},
+			gridTemplateRows: {
+				main: '72px minmax(0, 1fr)',
+			},
 		},
 	},
 
