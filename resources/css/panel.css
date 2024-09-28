@@ -1,6 +1,15 @@
+@import "https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.material-symbols-outlined {
+    font-variation-settings: 'FILL' 0,
+    'wght' 300,
+    'GRAD' -25,
+    'opsz' 24
+}
 
 /* Primary and Surface Palettes */
 :root {
@@ -66,9 +75,9 @@
     --p-content-hover-background: var(--p-surface-800);
     --p-content-hover-color: var(--p-surface-0);
     --p-highlight-background: color-mix(in srgb, var(--p-primary-400), transparent 84%);
-    --p-highlight-color: rgba(255,255,255,.87);
+    --p-highlight-color: rgba(255, 255, 255, .87);
     --p-highlight-focus-background: color-mix(in srgb, var(--p-primary-400), transparent 76%);
-    --p-highlight-focus-color: rgba(255,255,255,.87);
+    --p-highlight-focus-color: rgba(255, 255, 255, .87);
     --p-text-color: var(--p-surface-0);
     --p-text-hover-color: var(--p-surface-0);
     --p-text-muted-color: var(--p-surface-400);

@@ -57,14 +57,14 @@ const submit = () => {
 
 				<div class="mt-4 block">
 					<label class="flex items-center">
-						<Checkbox name="remember" v-model:checked="form.remember" />
+						<Checkbox name="remember" :binary="true" v-model="form.remember" />
 						<span class="ms-2 text-sm text-gray-600">Remember me</span>
 					</label>
 				</div>
 
 				<div class="mt-4 flex items-center justify-end gap-4">
 					<Link :href="route('password.request')" class="text-sm text-gray-600 underline hover:text-gray-700">Forgot your password?</Link>
-					<Button :loading="form.processing">Log in</Button>
+					<Button type="submit" :loading="form.processing">Log in</Button>
 				</div>
 			</form>
 		</template>
