@@ -2,6 +2,8 @@
 import PanelNavigation from '@/Layouts/Authenticated/Partials/PanelNavigation.vue'
 import InputText from 'primevue/inputtext'
 import { ref } from 'vue'
+import { Link } from '@inertiajs/vue3'
+import Toast from 'primevue/toast'
 
 const search = ref(null)
 </script>
@@ -20,17 +22,16 @@ const search = ref(null)
 					<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-neutral-400">search</span>
 					<InputText placeholder="Find anything..." class="w-96 pl-10" />
 				</span>
-				<div class="flex items-center gap-1">
+				<Link :href="route('profile.edit')" class="border-200 flex items-center gap-1 rounded-xl border bg-neutral-100 px-4 transition-colors duration-200 ease-in-out hover:bg-neutral-200">
 					<span>Mateusz</span>
-					<span class="material-symbols-outlined text-xl">person</span>
-				</div>
+					<span class="material-symbols-outlined">person</span>
+				</Link>
 			</nav>
 		</header>
 		<main class="grid-cols-main grid">
 			<PanelNavigation />
-			<section class="overflow-y-scroll bg-neutral-50 p-6">
-				<slot />
-			</section>
+			<slot />
 		</main>
 	</div>
+	<Toast />
 </template>

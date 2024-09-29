@@ -6,6 +6,6 @@ import AuthenticatedLayout from '@/Layouts/Authenticated/AuthenticatedLayout.vue
 <template>
 	<Head title="Dashboard" />
 	<AuthenticatedLayout>
-		<h1 class="text-2xl font-semibold leading-4 text-neutral-800">Navigations</h1>
+		<template #title>Dashboard</template>
 	</AuthenticatedLayout>
 </template>

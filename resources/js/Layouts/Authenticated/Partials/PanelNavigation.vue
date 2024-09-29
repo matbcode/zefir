@@ -54,7 +54,7 @@ const items = ref([
 	},
 	{
 		label: 'Integrations',
-		icon: 'category',
+		icon: 'deployed_code',
 		expanded: false,
 		items: [
 			{
@@ -138,13 +138,13 @@ const items = ref([
 				<div
 					@click="item.expanded = !item.expanded"
 					:class="item.expanded ? 'bg-neutral-200' : 'bg-neutral-100'"
-					class="flex cursor-pointer flex-row items-center gap-2 rounded-lg border border-neutral-200 bg-neutral-100 p-3 transition-colors duration-200 hover:bg-neutral-200">
+					class="flex cursor-pointer flex-row items-center gap-2 rounded-lg border border-neutral-200 bg-neutral-100 p-3 transition-colors duration-200 ease-in-out hover:bg-neutral-200">
 					<span class="material-symbols-outlined">{{ item.icon }}</span>
 					<span class="text-sm font-semibold text-neutral-900">{{ item.label }}</span>
 				</div>
-				<div :class="item.expanded ? 'max-h-96 py-3 opacity-100' : 'max-h-0 py-0 opacity-0'" class="overflow-hidden transition-all duration-300 ease-in-out">
-					<div v-for="item in item.items" class="flex items-center gap-1">
-						<span class="material-symbols-outlined text-xl">{{ item.icon }}</span>
+				<div :class="item.expanded ? 'max-h-96 py-3 opacity-100' : 'max-h-0 py-0 opacity-0'" class="flex cursor-pointer flex-col gap-3 overflow-hidden pl-4 transition-all duration-300 ease-in-out">
+					<div v-for="item in item.items" class="flex items-center gap-1.5 transition-all duration-200 ease-in-out hover:pl-2">
+						<span class="material-symbols-outlined">{{ item.icon }}</span>
 						<span class="text-sm font-semibold text-neutral-900">{{ item.label }}</span>
 					</div>
 				</div>
