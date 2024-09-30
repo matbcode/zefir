@@ -4,6 +4,7 @@ import InputText from 'primevue/inputtext'
 import { ref } from 'vue'
 import { Link } from '@inertiajs/vue3'
 import Toast from 'primevue/toast'
+import DynamicDialog from 'primevue/dynamicdialog'
 
 const search = ref(null)
 </script>
@@ -34,4 +35,5 @@ const search = ref(null)
 		</main>
 	</div>
 	<Toast />
+	<DynamicDialog />
 </template>

@@ -6,6 +6,7 @@ import { createInertiaApp } from '@inertiajs/vue3'
 import { ZiggyVue } from '../../vendor/tightenco/ziggy'
 import PrimeVue from 'primevue/config'
 import ToastService from 'primevue/toastservice'
+import DialogService from 'primevue/dialogservice'
 import Aura from './presets/aura'
 import AuthenticatedLayout from '@/Layouts/Authenticated/AuthenticatedLayout.vue'
 
@@ -29,6 +30,7 @@ createInertiaApp({
 				pt: Aura,
 			})
 			.use(ToastService)
+			.use(DialogService)
 			.mount(el)
 	},
 	progress: {
