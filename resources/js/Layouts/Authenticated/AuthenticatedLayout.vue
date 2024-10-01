@@ -23,7 +23,9 @@ const search = ref(null)
 					<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-neutral-400">search</span>
 					<InputText placeholder="Find anything..." class="w-96 pl-10" />
 				</span>
-				<Link :href="route('profile.edit')" class="border-200 flex items-center gap-1 rounded-xl border bg-neutral-100 px-4 transition-colors duration-200 ease-in-out hover:bg-neutral-200">
+				<Link
+					:href="route('profile.edit')"
+					class="border-200 flex items-center gap-1 rounded-xl border bg-neutral-100 pl-4 pr-3 transition-colors duration-200 ease-in-out hover:bg-neutral-200">
 					<span>Mateusz</span>
 					<span class="material-symbols-outlined">person</span>
 				</Link>

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DomainController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
@@ -25,6 +26,12 @@ Route::middleware('auth')->group(function () {
 	Route::put('/cms/languages', [LanguageController::class, 'store'])->name('language.store');
 	Route::patch('/cms/languages/{language}', [LanguageController::class, 'update'])->name('language.update');
 	Route::delete('/cms/languages/{language}', [LanguageController::class, 'destroy'])->name('language.destroy');
+
+	// Domain
+	Route::get('/cms/domains', [DomainController::class, 'index'])->name('domain.index');
+	Route::put('/cms/domains', [DomainController::class, 'store'])->name('domain.store');
+	Route::patch('/cms/domains/{domain}', [DomainController::class, 'update'])->name('domain.update');
+	Route::delete('/cms/domains/{domain}', [DomainController::class, 'destroy'])->name('domain.destroy');
 
 	// Profile
     Route::get('/cms/profile', [ProfileController::class, 'edit'])->name('profile.edit');

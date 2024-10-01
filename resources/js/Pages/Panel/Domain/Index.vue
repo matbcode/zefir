@@ -8,10 +8,9 @@ import Column from 'primevue/column'
 import Menu from 'primevue/menu'
 import { ref } from 'vue'
 import { useDialog } from 'primevue/usedialog'
-import AddLanguage from '@/Pages/Panel/Language/Dialogues/AddLanguage.vue'
-import Tag from 'primevue/tag'
 import { useToast } from 'primevue/usetoast'
-import EditLanguage from '@/Pages/Panel/Language/Dialogues/EditLanguage.vue'
+import AddDomain from '@/Pages/Panel/Domain/Dialogues/AddDomain.vue'
+import EditDomain from '@/Pages/Panel/Domain/Dialogues/EditDomain.vue'
 const toast = useToast()
 
 // Define props for incoming languages data
@@ -19,13 +18,16 @@ defineProps({
 	languages: {
 		type: Object,
 	},
+	domains: {
+		type: Object,
+	},
 })
 
 // Dialog setup for adding languages
 const dialog = useDialog()
 
-const showAddLanguageDialog = () => {
-	dialog.open(AddLanguage, {
+const showAddDialog = () => {
+	dialog.open(AddDomain, {
 		props: {
 			header: 'Add Language',
 			style: {
@@ -37,7 +39,7 @@ const showAddLanguageDialog = () => {
 }
 
 const showEditDialog = (data) => {
-	dialog.open(EditLanguage, {
+	dialog.open(EditDomain, {
 		props: {
 			header: 'Edit Language',
 			style: {
@@ -71,37 +73,30 @@ const deleteRow = (row) => {
 	toast.add({
 		severity: 'success',
 		summary: 'Success',
-		detail: row.language + ' has been deleted',
+		detail: row.domain + ' has been deleted',
 		life: 6000,
 	})
-	router.delete(route('language.destroy', row.id))
+	router.delete(route('domain.destroy', row.id))
 }
 </script>
 
 <template>
 	<Head title="Profile" />
 	<SectionWrapper>
-		<template v-slot:title>Languages</template>
+		<template v-slot:title>Domains</template>
 		<template v-slot:controls>
-			<Button @click="showAddLanguageDialog" icon="pi pi-plus" label="Add Language" severity="success"></Button>
+			<Button @click="showAddDialog" icon="pi pi-plus" label="Add Domain" severity="success"></Button>
 		</template>
 
 		<div class="flex items-start gap-6 max-xl:flex-col">
 			<Tile>
-				<template #title>Manage Languages</template>
-				<template #description>Manage your available languages.</template>
+				<template #title>Manage Domains</template>
+				<template #description>Manage your available domains.</template>
 				<template #content>
-					<DataTable :value="languages">
+					<DataTable :value="domains">
 						<Column field="id" header="ID"></Column>
-						<Column field="public" header="Status">
-							<template #body="slotProps">
-								<Tag v-if="slotProps.data.public" severity="success" value="Public" rounded></Tag>
-								<Tag v-else severity="danger" value="Hidden" rounded></Tag>
-							</template>
-						</Column>
-						<Column field="language" header="Language"></Column>
-						<Column field="abbreviation" header="Abbreviation"></Column>
-						<Column field="code" header="Code"></Column>
+						<Column field="domain" header="Domain"></Column>
+						<Column field="language.language" header="Language"></Column>
 						<Column header="Action">
 							<template #body="slotProps">
 								<!-- Action button that triggers the menu -->

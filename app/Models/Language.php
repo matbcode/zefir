@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Language extends Model
 {
@@ -28,5 +29,13 @@ class Language extends Model
 		return [
 			'public' => 'boolean',
 		];
+	}
+
+	/**
+	 * @return BelongsToMany
+	 */
+	public function domains(): BelongsToMany
+	{
+		return $this->belongsToMany(Domain::class);
 	}
 }

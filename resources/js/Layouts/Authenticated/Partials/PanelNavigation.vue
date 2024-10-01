@@ -1,5 +1,6 @@
 <script setup>
 import { ref } from 'vue'
+import { Link } from '@inertiajs/vue3'
 
 const items = ref([
 	{
@@ -94,6 +95,7 @@ const items = ref([
 			{
 				label: 'Languages',
 				icon: 'language',
+				href: route('language.index'),
 			},
 			{
 				label: 'Translations',
@@ -113,6 +115,7 @@ const items = ref([
 			{
 				label: 'Domains',
 				icon: 'domain',
+				href: route('domain.index'),
 			},
 			{
 				label: 'Redirects',
@@ -142,11 +145,13 @@ const items = ref([
 					<span class="material-symbols-outlined">{{ item.icon }}</span>
 					<span class="text-sm font-semibold text-neutral-900">{{ item.label }}</span>
 				</div>
-				<div :class="item.expanded ? 'max-h-96 py-3 opacity-100' : 'max-h-0 py-0 opacity-0'" class="flex cursor-pointer flex-col gap-3 overflow-hidden pl-4 transition-all duration-300 ease-in-out">
-					<div v-for="item in item.items" class="flex items-center gap-1.5 transition-all duration-200 ease-in-out hover:pl-2">
+				<div
+					:class="item.expanded ? 'max-h-96 py-3 opacity-100' : 'max-h-0 py-0 opacity-0'"
+					class="flex cursor-pointer flex-col gap-3 overflow-hidden pl-4 transition-all duration-300 ease-in-out">
+					<Link v-for="item in item.items" :href="item.href" class="flex items-center gap-1.5 transition-all duration-200 ease-in-out hover:pl-2">
 						<span class="material-symbols-outlined">{{ item.icon }}</span>
-						<span class="text-sm font-semibold text-neutral-900">{{ item.label }}</span>
-					</div>
+						<span class="text-sm font-semibold">{{ item.label }}</span>
+					</Link>
 				</div>
 			</div>
 		</div>
