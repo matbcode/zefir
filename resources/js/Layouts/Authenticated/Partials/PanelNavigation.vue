@@ -1,6 +1,8 @@
 <script setup>
 import { ref } from 'vue'
-import { Link } from '@inertiajs/vue3'
+import { Link, usePage } from '@inertiajs/vue3'
+
+const page = usePage()
 
 const items = ref([
 	{
@@ -148,7 +150,11 @@ const items = ref([
 				<div
 					:class="item.expanded ? 'max-h-96 py-3 opacity-100' : 'max-h-0 py-0 opacity-0'"
 					class="flex cursor-pointer flex-col gap-3 overflow-hidden pl-4 transition-all duration-300 ease-in-out">
-					<Link v-for="item in item.items" :href="item.href" class="flex items-center gap-1.5 transition-all duration-200 ease-in-out hover:pl-2">
+					<Link
+						v-for="item in item.items"
+						:href="item.href"
+						class="flex items-center gap-1.5 transition-all duration-200 ease-in-out hover:pl-2"
+						:class="page.props.ziggy.location === item.href ? 'pl-2 text-blue-500' : 'text-neutral-900'">
 						<span class="material-symbols-outlined">{{ item.icon }}</span>
 						<span class="text-sm font-semibold">{{ item.label }}</span>
 					</Link>
