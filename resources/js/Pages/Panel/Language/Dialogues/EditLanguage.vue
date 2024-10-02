@@ -1,5 +1,5 @@
 <script setup>
-import { useForm } from '@inertiajs/vue3'
+import { router, useForm } from '@inertiajs/vue3'
 import { useToast } from 'primevue/usetoast'
 import InputText from 'primevue/inputtext'
 import InputError from '@/Components/InputError.vue'
@@ -17,7 +17,7 @@ const closeDialog = () => {
 
 const form = useForm({
 	public: dialogRef.value.data.public,
-	language: dialogRef.value.data.language,
+	name: dialogRef.value.data.name,
 	abbreviation: dialogRef.value.data.abbreviation,
 	code: dialogRef.value.data.code,
 })
@@ -29,7 +29,7 @@ function submit() {
 			toast.add({
 				severity: 'success',
 				summary: 'Success',
-				detail: form.language + ' has been updated',
+				detail: form.name + ' has been updated',
 				life: 6000,
 			})
 		},
@@ -40,9 +40,9 @@ function submit() {
 <template>
 	<form @submit.prevent="submit" class="space-y-4">
 		<div>
-			<InputLabel for="language" value="Language" />
-			<InputText id="language" type="text" class="mt-1 block w-full" v-model="form.language" required autofocus />
-			<InputError class="mt-2" :message="form.errors.language" />
+			<InputLabel for="name" value="Language" />
+			<InputText id="name" type="text" class="mt-1 block w-full" v-model="form.name" required autofocus />
+			<InputError class="mt-2" :message="form.errors.name" />
 		</div>
 		<div>
 			<InputLabel for="abbreviation" value="Abbreviation" />

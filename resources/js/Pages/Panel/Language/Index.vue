@@ -99,7 +99,7 @@ const deleteRow = (row) => {
 								<Tag v-else severity="danger" value="Hidden" rounded></Tag>
 							</template>
 						</Column>
-						<Column field="language" header="Language"></Column>
+						<Column field="name" header="Name"></Column>
 						<Column field="abbreviation" header="Abbreviation"></Column>
 						<Column field="code" header="Code"></Column>
 						<Column header="Action">

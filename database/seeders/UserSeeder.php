@@ -16,9 +16,10 @@ class UserSeeder extends Seeder
     {
 		DB::table('users')->insert([
 			'name' => 'admin',
-			'email' => 'matbcode@gmail.com',
+			'email' => 'test@zefir.io',
 			'email_verified_at' => false,
-			'password' => Hash::make('0MCcTWZ4qB')
+			'password' => Hash::make(']J[{gp*cn+NW0YR'),
+			'language_id' => '1'
 		]);
     }
 }

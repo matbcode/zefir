@@ -14,7 +14,7 @@ class Language extends Model
 	 */
 	protected $fillable = [
 		'public',
-		'language',
+		'name',
 		'abbreviation',
 		'code',
 	];

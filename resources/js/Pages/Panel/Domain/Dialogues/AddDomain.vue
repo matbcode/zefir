@@ -52,7 +52,7 @@ function submit() {
 				v-model="form.language_id"
 				:options="languages"
 				optionValue="id"
-				optionLabel="language"
+				optionLabel="name"
 				placeholder="Select a language"
 				class="mt-1 block w-full" />
 			<InputError class="mt-2" :message="form.errors.language_id" />

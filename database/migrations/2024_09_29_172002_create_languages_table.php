@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('languages', function (Blueprint $table) {
             $table->id();
 			$table->boolean('public');
-			$table->string('language');
+			$table->string('name');
 			$table->string('abbreviation');
 			$table->string('code');
             $table->timestamps();

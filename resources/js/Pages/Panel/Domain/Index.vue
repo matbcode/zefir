@@ -29,7 +29,7 @@ const dialog = useDialog()
 const showAddDialog = () => {
 	dialog.open(AddDomain, {
 		props: {
-			header: 'Add Language',
+			header: 'Add Domain',
 			style: {
 				width: '400px',
 			},
@@ -41,7 +41,7 @@ const showAddDialog = () => {
 const showEditDialog = (data) => {
 	dialog.open(EditDomain, {
 		props: {
-			header: 'Edit Language',
+			header: 'Edit Domain',
 			style: {
 				width: '400px',
 			},
@@ -96,7 +96,7 @@ const deleteRow = (row) => {
 					<DataTable :value="domains">
 						<Column field="id" header="ID"></Column>
 						<Column field="domain" header="Domain"></Column>
-						<Column field="language.language" header="Language"></Column>
+						<Column field="language.name" header="Language"></Column>
 						<Column header="Action">
 							<template #body="slotProps">
 								<!-- Action button that triggers the menu -->

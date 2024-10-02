@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Language;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -28,7 +27,7 @@ class LanguageController extends Controller
 		// Validate the request data
 		$validatedData = $request->validate([
 			'public' => ['required', 'boolean'],
-			'language' => ['required', 'string'],
+			'name' => ['required', 'string'],
 			'abbreviation' => ['required', 'string'],
 			'code' => ['required', 'string'],
 		]);
@@ -48,7 +47,7 @@ class LanguageController extends Controller
 	{
 		$validatedData = $request->validate([
 			'public' => ['required', 'boolean'],
-			'language' => ['required', 'string'],
+			'name' => ['required', 'string'],
 			'abbreviation' => ['required', 'string'],
 			'code' => ['required', 'string'],
 		]);

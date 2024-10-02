@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CurrentLanguageController;
 use App\Http\Controllers\DomainController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\ProfileController;
@@ -26,6 +27,9 @@ Route::middleware('auth')->group(function () {
 	Route::put('/cms/languages', [LanguageController::class, 'store'])->name('language.store');
 	Route::patch('/cms/languages/{language}', [LanguageController::class, 'update'])->name('language.update');
 	Route::delete('/cms/languages/{language}', [LanguageController::class, 'destroy'])->name('language.destroy');
+
+	// Current Language
+	Route::get('/cms/current-language/{id}', [CurrentLanguageController::class, 'update'])->name('current-language.update');
 
 	// Domain
 	Route::get('/cms/domains', [DomainController::class, 'index'])->name('domain.index');
