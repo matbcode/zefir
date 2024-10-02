@@ -4,6 +4,7 @@ use App\Http\Controllers\CurrentLanguageController;
 use App\Http\Controllers\DomainController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -30,6 +31,12 @@ Route::middleware('auth')->group(function () {
 
 	// Current Language
 	Route::get('/cms/current-language/{id}', [CurrentLanguageController::class, 'update'])->name('current-language.update');
+
+	// User
+	Route::get('/cms/users', [UserController::class, 'index'])->name('user.index');
+	Route::put('/cms/users', [UserController::class, 'store'])->name('user.store');
+	Route::patch('/cms/users/{user}', [UserController::class, 'update'])->name('user.update');
+	Route::delete('/cms/users/{user}', [UserController::class, 'destroy'])->name('user.destroy');
 
 	// Domain
 	Route::get('/cms/domains', [DomainController::class, 'index'])->name('domain.index');

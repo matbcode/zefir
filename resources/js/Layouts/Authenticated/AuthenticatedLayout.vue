@@ -2,7 +2,7 @@
 import PanelNavigation from '@/Layouts/Authenticated/Partials/PanelNavigation.vue'
 import InputText from 'primevue/inputtext'
 import { computed, ref } from 'vue'
-import { Link, router, usePage } from '@inertiajs/vue3'
+import { router, usePage } from '@inertiajs/vue3'
 import Toast from 'primevue/toast'
 import DynamicDialog from 'primevue/dynamicdialog'
 import Menu from 'primevue/menu'

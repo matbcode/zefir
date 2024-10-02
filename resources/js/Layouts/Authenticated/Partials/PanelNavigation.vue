@@ -113,6 +113,7 @@ const items = ref([
 			{
 				label: 'Users',
 				icon: 'group',
+				href: route('user.index'),
 			},
 			{
 				label: 'Domains',
