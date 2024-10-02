@@ -20,7 +20,7 @@ const closeDialog = () => {
 }
 
 const form = useForm({
-	domain: null,
+	name: null,
 	language_id: null,
 })
 
@@ -31,7 +31,7 @@ function submit() {
 			toast.add({
 				severity: 'success',
 				summary: 'Success',
-				detail: form.domain + ' has been added to domains',
+				detail: form.name + ' has been added to domains',
 				life: 6000,
 			})
 		},
@@ -42,8 +42,8 @@ function submit() {
 <template>
 	<form @submit.prevent="submit" class="space-y-4">
 		<div>
-			<InputLabel for="domain" value="Domain" />
-			<InputText id="domain" type="text" class="mt-1 block w-full" v-model="form.domain" required autofocus />
+			<InputLabel for="name" value="Domain" />
+			<InputText id="name" type="text" class="mt-1 block w-full" v-model="form.name" required autofocus />
 			<InputError class="mt-2" :message="form.errors.domain" />
 		</div>
 		<div>

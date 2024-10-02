@@ -71,7 +71,7 @@ const deleteRow = (row) => {
 	toast.add({
 		severity: 'success',
 		summary: 'Success',
-		detail: row.language + ' has been deleted',
+		detail: row.name + ' has been deleted',
 		life: 6000,
 	})
 	router.delete(route('language.destroy', row.id))

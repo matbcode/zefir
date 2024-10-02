@@ -73,7 +73,7 @@ const deleteRow = (row) => {
 	toast.add({
 		severity: 'success',
 		summary: 'Success',
-		detail: row.domain + ' has been deleted',
+		detail: row.name + ' has been deleted',
 		life: 6000,
 	})
 	router.delete(route('domain.destroy', row.id))
@@ -95,7 +95,7 @@ const deleteRow = (row) => {
 				<template #content>
 					<DataTable :value="domains">
 						<Column field="id" header="ID"></Column>
-						<Column field="domain" header="Domain"></Column>
+						<Column field="name" header="Name"></Column>
 						<Column field="language.name" header="Language"></Column>
 						<Column header="Action">
 							<template #body="slotProps">

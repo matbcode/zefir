@@ -6,7 +6,6 @@ import InputError from '@/Components/InputError.vue'
 import InputLabel from '@/Components/InputLabel.vue'
 import Button from 'primevue/button'
 import { computed, inject } from 'vue'
-import ToggleSwitch from 'primevue/toggleswitch'
 import Select from 'primevue/select'
 
 const page = usePage()
@@ -21,7 +20,7 @@ const closeDialog = () => {
 }
 
 const form = useForm({
-	domain: dialogRef.value.data.domain,
+	name: dialogRef.value.data.name,
 	language_id: dialogRef.value.data.language_id,
 })
 
@@ -32,7 +31,7 @@ function submit() {
 			toast.add({
 				severity: 'success',
 				summary: 'Success',
-				detail: form.domain + ' has been updated',
+				detail: form.name + ' has been updated',
 				life: 6000,
 			})
 		},
@@ -43,9 +42,9 @@ function submit() {
 <template>
 	<form @submit.prevent="submit" class="space-y-4">
 		<div>
-			<InputLabel for="domain" value="Domain" />
-			<InputText id="domain" type="text" class="mt-1 block w-full" v-model="form.domain" required autofocus />
-			<InputError class="mt-2" :message="form.errors.domain" />
+			<InputLabel for="name" value="Domain" />
+			<InputText id="name" type="text" class="mt-1 block w-full" v-model="form.name" required autofocus />
+			<InputError class="mt-2" :message="form.errors.name" />
 		</div>
 		<div>
 			<InputLabel for="language_id" value="Language" />

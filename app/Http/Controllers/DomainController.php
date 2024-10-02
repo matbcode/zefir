@@ -28,7 +28,7 @@ class DomainController extends Controller
 	{
 		// Validate the request data
 		$validatedData = $request->validate([
-			'domain' => ['required', 'string'],
+			'name' => ['required', 'string'],
 			'language_id' => ['required', 'exists:languages,id'],
 		]);
 
@@ -46,7 +46,7 @@ class DomainController extends Controller
 	public function update(Request $request, Domain $domain): RedirectResponse
 	{
 		$validatedData = $request->validate([
-			'domain' => ['required', 'string'],
+			'name' => ['required', 'string'],
 			'language_id' => ['required', 'exists:languages,id'],
 		]);
 
