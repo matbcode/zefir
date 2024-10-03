@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('domains', function (Blueprint $table) {
             $table->id();
 			$table->string('name')->unique();
-			$table->foreignId('language_id');
+			$table->foreignId('language_id')->constrained('languages');
             $table->timestamps();
         });
     }

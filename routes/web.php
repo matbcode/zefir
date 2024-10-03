@@ -3,6 +3,7 @@
 use App\Http\Controllers\CurrentLanguageController;
 use App\Http\Controllers\DomainController;
 use App\Http\Controllers\LanguageController;
+use App\Http\Controllers\PageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use Illuminate\Foundation\Application;
@@ -23,6 +24,11 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
+	// Page
+	Route::get('/cms/pages', [PageController::class, 'index'])->name('page.index');
+	Route::put('/cms/pages', [PageController::class, 'store'])->name('page.store');
+	Route::get('/cms/pages/{page}', [PageController::class, 'edit'])->name('page.edit');
+
 	// Language
 	Route::get('/cms/languages', [LanguageController::class, 'index'])->name('language.index');
 	Route::put('/cms/languages', [LanguageController::class, 'store'])->name('language.store');

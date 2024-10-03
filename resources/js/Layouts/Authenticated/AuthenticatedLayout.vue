@@ -82,7 +82,7 @@ const selectLanguage = (language_id) => {
 				</div>
 			</nav>
 		</header>
-		<main class="grid-cols-main grid">
+		<main class="grid-cols-main grid h-full">
 			<PanelNavigation />
 			<slot />
 		</main>

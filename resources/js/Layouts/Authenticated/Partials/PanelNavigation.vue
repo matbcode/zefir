@@ -17,6 +17,7 @@ const items = ref([
 			{
 				label: 'Pages',
 				icon: 'space_dashboard',
+				href: route('page.index'),
 			},
 		],
 	},
@@ -127,6 +128,10 @@ const items = ref([
 			{
 				label: 'Settings',
 				icon: 'tune',
+			},
+			{
+				label: 'Logs',
+				icon: 'monitoring',
 			},
 			{
 				label: 'Security',

@@ -16,7 +16,7 @@ return new class extends Migration
 			$table->boolean('public')->default(false);
 			$table->string('name');
 			$table->string('path');
-			$table->foreignId('language_id')->nullable();
+			$table->foreignId('language_id')->nullable()->constrained('languages');
 			$table->softDeletes();
             $table->timestamps();
         });

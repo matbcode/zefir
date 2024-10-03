@@ -9,14 +9,15 @@ import Menu from 'primevue/menu'
 import { ref } from 'vue'
 import { useDialog } from 'primevue/usedialog'
 import { useToast } from 'primevue/usetoast'
-import AddUser from '@/Pages/Panel/User/Dialogues/AddUser.vue'
-import EditUser from '@/Pages/Panel/User/Dialogues/EditUser.vue'
+import AddPage from '@/Pages/Panel/Page/Dialogues/AddPage.vue'
+import { FilterMatchMode } from '@primevue/core/api'
+import InputText from 'primevue/inputtext'
 import Tag from 'primevue/tag'
 const toast = useToast()
 
 // Define props for incoming languages data
 defineProps({
-	users: {
+	pages: {
 		type: Object,
 	},
 })
@@ -25,27 +26,14 @@ defineProps({
 const dialog = useDialog()
 
 const showAddDialog = () => {
-	dialog.open(AddUser, {
+	dialog.open(AddPage, {
 		props: {
-			header: 'Add User',
+			header: 'Add Page',
 			style: {
 				width: '400px',
 			},
 			modal: true,
 		},
-	})
-}
-
-const showEditDialog = (data) => {
-	dialog.open(EditUser, {
-		props: {
-			header: 'Edit User',
-			style: {
-				width: '400px',
-			},
-			modal: true,
-		},
-		data: data,
 	})
 }
 
@@ -57,7 +45,8 @@ const selectedRow = ref(null)
 
 // Define menu items for row actions
 const menuItems = ref([
-	{ label: 'Edit', icon: 'pi pi-wrench', command: () => showEditDialog(selectedRow.value) },
+	{ label: 'Edit', icon: 'pi pi-wrench', command: () => router.visit(route('page.edit', selectedRow.value)) },
+	{ label: 'Preview', icon: 'pi pi-eye', command: () => router.visit(route('page.edit', selectedRow.value)) },
 	{ label: 'Delete', icon: 'pi pi-trash', command: () => deleteRow(selectedRow.value) },
 ])
 
@@ -74,31 +63,49 @@ const deleteRow = (row) => {
 		detail: row.name + ' has been deleted',
 		life: 6000,
 	})
-	router.delete(route('user.destroy', row.id))
+	router.delete(route('domain.destroy', row.id))
 }
+
+const filters = ref({
+	global: { value: null, matchMode: FilterMatchMode.CONTAINS },
+})
 </script>
 
 <template>
 	<Head title="Profile" />
 	<SectionWrapper>
-		<template v-slot:title>Users</template>
+		<template v-slot:title>Pages</template>
 		<template v-slot:controls>
-			<Button @click="showAddDialog" icon="pi pi-plus" label="Add User" severity="success"></Button>
+			<Button @click="showAddDialog" icon="pi pi-plus" label="Add Page" severity="success"></Button>
 		</template>
 
-		<div class="flex items-start gap-6 max-xl:flex-col">
-			<Tile>
-				<template #title>Manage Users</template>
-				<template #description>Manage your available domains.</template>
+		<div class="grid items-start gap-6">
+			<Tile class="">
+				<template #title>Manage Pages</template>
+				<template #controls>
+					<span class="relative">
+						<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-neutral-400">search</span>
+						<InputText v-model="filters['global'].value" placeholder="Search..." class="pl-10" />
+					</span>
+				</template>
 				<template #content>
-					<DataTable :value="users">
-						<Column field="id" header="ID"></Column>
-						<Column field="name" header="Name"></Column>
-						<Column field="email" header="Email"></Column>
-						<Column field="email_verified_at" header="Status">
+					<DataTable dataKey="id" :globalFilterFields="['name', 'path']" v-model:filters="filters" :value="pages" paginator :rows="7">
+						<Column sortable field="id" header="ID"></Column>
+						<Column sortable field="public" header="Status">
 							<template #body="slotProps">
-								<Tag v-if="slotProps.data.email_verified_at" severity="success" value="Verified" rounded></Tag>
-								<Tag v-else severity="danger" value="Inactive" rounded></Tag>
+								<Tag v-if="slotProps.data.public" severity="success" value="Public" rounded></Tag>
+								<Tag v-else severity="danger" value="Hidden" rounded></Tag>
+							</template>
+						</Column>
+						<Column sortable field="name" header="Name"></Column>
+						<Column sortable field="path" header="Path"></Column>
+						<Column field="language.name" header="Language"></Column>
+						<Column header="Navigations">
+							<template #body="slotProps">
+								<div class="flex gap-1.5">
+									<Tag severity="secondary" value="Main" rounded></Tag>
+									<Tag severity="secondary" value="Footer" rounded></Tag>
+								</div>
 							</template>
 						</Column>
 						<Column header="Action">
