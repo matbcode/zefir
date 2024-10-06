@@ -29,7 +29,7 @@ class PageController extends Controller
 		$validatedData = $request->validate([
 			'public' => ['required', 'boolean'],
 			'name' => ['required', 'string'],
-			'path' => ['required', 'string']
+			'path' => ['string', 'nullable']
 		]);
 
 		$validatedData['language_id'] = $request->user()->language_id;
@@ -46,7 +46,8 @@ class PageController extends Controller
 	public function edit(Page $page): Response
 	{
 		return Inertia::render('Panel/Page/Edit', [
-			'page' => $page
+			'page' => $page,
+			'metadata' => $page->metadata
 		]);
 	}
 
@@ -65,6 +66,17 @@ class PageController extends Controller
 
 		$page->update($validatedData);
 
+		return back();
+	}
+
+	/**
+	 * @param Request $request
+	 * @param Page $page
+	 * @return RedirectResponse
+	 */
+	public function metadata(Request $request, Page $page): RedirectResponse
+	{
+		$page->saveMetadata($request->post());
 		return back();
 	}
 

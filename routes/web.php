@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\ComponentController;
 use App\Http\Controllers\CurrentLanguageController;
 use App\Http\Controllers\DomainController;
 use App\Http\Controllers\LanguageController;
+use App\Http\Controllers\MetadataController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
@@ -28,6 +30,12 @@ Route::middleware('auth')->group(function () {
 	Route::get('/cms/pages', [PageController::class, 'index'])->name('page.index');
 	Route::put('/cms/pages', [PageController::class, 'store'])->name('page.store');
 	Route::get('/cms/pages/{page}', [PageController::class, 'edit'])->name('page.edit');
+	Route::patch('/cms/pages/{page}', [PageController::class, 'update'])->name('page.update');
+	Route::delete('/cms/pages/{page}', [PageController::class, 'destroy'])->name('page.destroy');
+	Route::post('/cms/pages/{page}/metadata', [PageController::class, 'metadata'])->name('page.metadata');
+
+	// Metadata
+	Route::get('/cms/metadata', [MetadataController::class, 'index'])->name('metadata.index');
 
 	// Language
 	Route::get('/cms/languages', [LanguageController::class, 'index'])->name('language.index');
@@ -37,6 +45,10 @@ Route::middleware('auth')->group(function () {
 
 	// Current Language
 	Route::get('/cms/current-language/{id}', [CurrentLanguageController::class, 'update'])->name('current-language.update');
+
+	// Components
+	Route::get('/cms/components', [ComponentController::class, 'index'])->name('component.index');
+	Route::put('/cms/components', [ComponentController::class, 'store'])->name('component.store');
 
 	// User
 	Route::get('/cms/users', [UserController::class, 'index'])->name('user.index');

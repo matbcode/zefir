@@ -33,6 +33,7 @@ const items = ref([
 			{
 				label: 'Components',
 				icon: 'widgets',
+				href: route('component.index'),
 			},
 			{
 				label: 'Files',
@@ -79,6 +80,7 @@ const items = ref([
 			{
 				label: 'Metadata',
 				icon: 'description',
+				href: route('metadata.index'),
 			},
 			{
 				label: 'Sitemap',

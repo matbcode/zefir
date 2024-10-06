@@ -11,11 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('domains', function (Blueprint $table) {
-            $table->id();
-			$table->string('name')->unique();
+        Schema::create('components', function (Blueprint $table) {
+			$table->id();
+			$table->string('type'); // (e.g., Snippet, Text, etc.)
 			$table->foreignId('language_id')->constrained('languages')->onDelete('cascade');;
-            $table->timestamps();
+			$table->morphs('componentable'); // Polymorphic relationship to the specific component types
+			$table->timestamps();
         });
     }
 
@@ -24,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('domains');
+        Schema::dropIfExists('components');
     }
 };

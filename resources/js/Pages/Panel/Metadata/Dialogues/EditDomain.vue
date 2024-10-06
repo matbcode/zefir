@@ -5,35 +5,33 @@ import InputText from 'primevue/inputtext'
 import InputError from '@/Components/InputError.vue'
 import InputLabel from '@/Components/InputLabel.vue'
 import Button from 'primevue/button'
-import { inject, computed } from 'vue'
+import { computed, inject } from 'vue'
 import Select from 'primevue/select'
-import ToggleSwitch from 'primevue/toggleswitch'
-
-const toast = useToast()
-const dialogRef = inject('dialogRef')
 
 const page = usePage()
 
 const languages = computed(() => page.props.languages)
+
+const toast = useToast()
+const dialogRef = inject('dialogRef')
 
 const closeDialog = () => {
 	dialogRef.value.close()
 }
 
 const form = useForm({
-	public: true,
-	name: null,
-	path: null,
+	name: dialogRef.value.data.name,
+	language_id: dialogRef.value.data.language_id,
 })
 
 function submit() {
-	form.put(route('page.store'), {
+	form.patch(route('domain.update', dialogRef.value.data.id), {
 		onSuccess: () => {
 			dialogRef.value.close()
 			toast.add({
 				severity: 'success',
 				summary: 'Success',
-				detail: form.name + ' has been added to pages',
+				detail: form.name + ' has been updated',
 				life: 6000,
 			})
 		},
@@ -44,18 +42,20 @@ function submit() {
 <template>
 	<form @submit.prevent="submit" class="space-y-4">
 		<div>
-			<InputLabel for="name" value="Name" />
+			<InputLabel for="name" value="Domain" />
 			<InputText id="name" type="text" class="mt-1 block w-full" v-model="form.name" required autofocus />
 			<InputError class="mt-2" :message="form.errors.name" />
 		</div>
 		<div>
-			<InputLabel for="path" value="Path" />
-			<InputText id="path" type="text" class="mt-1 block w-full" v-model="form.path" />
-			<InputError class="mt-2" :message="form.errors.path" />
-		</div>
-		<div class="flex items-center">
-			<ToggleSwitch v-model="form.public" />
-			<label class="ml-2">Public</label>
+			<InputLabel for="language_id" value="Language" />
+			<Select
+				v-model="form.language_id"
+				:options="languages"
+				optionValue="id"
+				optionLabel="name"
+				placeholder="Select a language"
+				class="mt-1 block w-full" />
+			<InputError class="mt-2" :message="form.errors.language_id" />
 		</div>
 		<div class="flex items-center gap-2">
 			<Button severity="success" type="submit" :loading="form.processing">Save</Button>

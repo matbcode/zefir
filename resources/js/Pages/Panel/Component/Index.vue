@@ -9,15 +9,15 @@ import Menu from 'primevue/menu'
 import { ref } from 'vue'
 import { useDialog } from 'primevue/usedialog'
 import { useToast } from 'primevue/usetoast'
-import AddPage from '@/Pages/Panel/Page/Dialogues/AddPage.vue'
 import { FilterMatchMode } from '@primevue/core/api'
 import InputText from 'primevue/inputtext'
 import Tag from 'primevue/tag'
+import NewComponent from '@/Pages/Panel/Component/Dialogues/NewComponent.vue'
 const toast = useToast()
 
 // Define props for incoming languages data
 defineProps({
-	pages: {
+	components: {
 		type: Object,
 	},
 })
@@ -25,10 +25,10 @@ defineProps({
 // Dialog setup for adding languages
 const dialog = useDialog()
 
-const showAddDialog = () => {
-	dialog.open(AddPage, {
+const showNewDialog = () => {
+	dialog.open(NewComponent, {
 		props: {
-			header: 'Add Page',
+			header: 'New Component',
 			style: {
 				width: '400px',
 			},
@@ -63,7 +63,7 @@ const deleteRow = (row) => {
 		detail: row.name + ' has been deleted',
 		life: 6000,
 	})
-	router.delete(route('page.destroy', row.id))
+	router.delete(route('domain.destroy', row.id))
 }
 
 const filters = ref({
@@ -74,14 +74,14 @@ const filters = ref({
 <template>
 	<Head title="Profile" />
 	<SectionWrapper>
-		<template v-slot:title>Pages</template>
+		<template v-slot:title>Components</template>
 		<template v-slot:controls>
-			<Button @click="showAddDialog" icon="pi pi-plus" label="Add Page" severity="success"></Button>
+			<Button @click="showNewDialog" icon="pi pi-plus" label="New Component" severity="success"></Button>
 		</template>
 
 		<div class="grid items-start gap-6">
-			<Tile class="">
-				<template #title>Manage Pages</template>
+			<Tile>
+				<template #title>Manage Components</template>
 				<template #controls>
 					<span class="relative">
 						<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-neutral-400">search</span>
@@ -89,22 +89,23 @@ const filters = ref({
 					</span>
 				</template>
 				<template #content>
-					<DataTable dataKey="id" :globalFilterFields="['name', 'path']" v-model:filters="filters" :value="pages" paginator :rows="7">
+					<DataTable
+						dataKey="id"
+						:globalFilterFields="['componentable.name', 'type']"
+						v-model:filters="filters"
+						:value="components"
+						paginator
+						:rows="7">
 						<Column sortable field="id" header="ID"></Column>
-						<Column sortable field="public" header="Status">
-							<template #body="slotProps">
-								<Tag v-if="slotProps.data.public" severity="success" value="Public" rounded></Tag>
-								<Tag v-else severity="danger" value="Hidden" rounded></Tag>
-							</template>
-						</Column>
-						<Column sortable field="name" header="Name"></Column>
-						<Column sortable field="path" header="Path"></Column>
+						<Column sortable field="componentable.name" header="Name"></Column>
+						<Column sortable field="type" header="Type"></Column>
 						<Column field="language.name" header="Language"></Column>
-						<Column header="Navigations">
+						<Column header="Assignment">
 							<template #body="slotProps">
 								<div class="flex gap-1.5">
-									<Tag severity="secondary" value="Main" rounded></Tag>
-									<Tag severity="secondary" value="Footer" rounded></Tag>
+									<Tag severity="secondary" value="Homepage" rounded></Tag>
+									<Tag severity="secondary" value="About us" rounded></Tag>
+									<Tag severity="secondary" value="How it works" rounded></Tag>
 								</div>
 							</template>
 						</Column>

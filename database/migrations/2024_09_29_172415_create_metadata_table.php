@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('metadata', function (Blueprint $table) {
             $table->id();
+            $table->string('title')->nullable();
+            $table->string('description')->nullable();
+            $table->string('keywords')->nullable();
+            $table->string('image')->nullable();
+			$table->float('priority', 2)->nullable()->default(0.5);
 			$table->morphs('metadatable');
             $table->timestamps();
         });

@@ -11,10 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('domains', function (Blueprint $table) {
+        Schema::create('componentables', function (Blueprint $table) {
             $table->id();
-			$table->string('name')->unique();
-			$table->foreignId('language_id')->constrained('languages')->onDelete('cascade');;
+			$table->morphs('componentable'); // Page, Article, etc.
+			$table->foreignId('component_id')->constrained('components')->onDelete('cascade'); // Reference to the component
+			$table->integer('order')->nullable();
             $table->timestamps();
         });
     }
@@ -24,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('domains');
+        Schema::dropIfExists('componentables');
     }
 };

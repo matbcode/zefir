@@ -5,35 +5,33 @@ import InputText from 'primevue/inputtext'
 import InputError from '@/Components/InputError.vue'
 import InputLabel from '@/Components/InputLabel.vue'
 import Button from 'primevue/button'
-import { inject, computed } from 'vue'
+import { inject } from 'vue'
 import Select from 'primevue/select'
-import ToggleSwitch from 'primevue/toggleswitch'
 
 const toast = useToast()
 const dialogRef = inject('dialogRef')
 
 const page = usePage()
 
-const languages = computed(() => page.props.languages)
-
 const closeDialog = () => {
 	dialogRef.value.close()
 }
 
+const types = ['snippet']
+
 const form = useForm({
-	public: true,
+	type: null,
 	name: null,
-	path: null,
 })
 
 function submit() {
-	form.put(route('page.store'), {
+	form.put(route('component.store'), {
 		onSuccess: () => {
 			dialogRef.value.close()
 			toast.add({
 				severity: 'success',
 				summary: 'Success',
-				detail: form.name + ' has been added to pages',
+				detail: form.name + ' has been created',
 				life: 6000,
 			})
 		},
@@ -49,13 +47,9 @@ function submit() {
 			<InputError class="mt-2" :message="form.errors.name" />
 		</div>
 		<div>
-			<InputLabel for="path" value="Path" />
-			<InputText id="path" type="text" class="mt-1 block w-full" v-model="form.path" />
-			<InputError class="mt-2" :message="form.errors.path" />
-		</div>
-		<div class="flex items-center">
-			<ToggleSwitch v-model="form.public" />
-			<label class="ml-2">Public</label>
+			<InputLabel for="type" value="Name" />
+			<Select v-model="form.type" :options="types" placeholder="Select a Type" class="mt-1 block w-full" />
+			<InputError class="mt-2" :message="form.errors.type" />
 		</div>
 		<div class="flex items-center gap-2">
 			<Button severity="success" type="submit" :loading="form.processing">Save</Button>
